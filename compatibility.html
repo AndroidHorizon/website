@@ -57,6 +57,21 @@
       <p style="color:var(--text-mute); margin-top:14px">The launcher automatically tags each scanned APK by architecture and blocks launching anything 32-bit-only with an explanation, rather than only finding out after a failed extraction.</p>
     </section>
 
+    <section id="community-reports">
+      <h2>Community-submitted reports</h2>
+      <p>Submitted through the <a href="https://github.com/AndroidHorizon/AndroidHorizonNX/issues/new?template=game-compatibility-report.yml">Game compatibility report</a> issue form and processed automatically — an action downloads the APK, extracts its icon, verifies it's actually a game on the Play Store, and runs the submitted logs through an automated pass/fail/stutter analysis. Raw logs and the full report for each entry live in the <a href="https://github.com/AndroidHorizon/compat-reports">compat-reports</a> repo.</p>
+      <div id="community-reports-loading" style="color:var(--text-mute)">Loading…</div>
+      <div id="community-reports-empty" style="display:none; color:var(--text-mute)">No community submissions yet — be the first!</div>
+      <div id="community-reports-table" class="table-wrap" style="display:none">
+        <table>
+          <thead>
+            <tr><th>Game</th><th>Status</th><th>Details</th></tr>
+          </thead>
+          <tbody id="community-reports-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <section>
       <h2>What a game needs, to have a real chance</h2>
       <ul class="plain">
@@ -79,7 +94,7 @@
       <h2>Want another game supported?</h2>
       <div class="card">
         <p style="margin-top:0">The process that got Hill Climb Racing working was: provide the <code>.apk</code> (and any <code>.obb</code>/expansion file), then real hardware iteration — extract it, see what JNI calls and native symbols it actually makes, implement/stub what's missing, rebuild, test on real hardware, repeat. That loop needs a real APK to extract and real hardware to test against; it's not something to fake from documentation alone.</p>
-        <p style="margin-bottom:0">Open an issue on the <a href="https://github.com/AndroidHorizon/AHNX-Translation-Core/issues">AHNX-Translation-Core</a> repo with the APK and that process can start for real.</p>
+        <p style="margin-bottom:0">Submit a <a href="https://github.com/AndroidHorizon/AndroidHorizonNX/issues/new?template=game-compatibility-report.yml">Game compatibility report</a> with a direct link to the <code>.apk</code> and your three log files, and that process can start for real.</p>
       </div>
     </section>
 
@@ -93,3 +108,56 @@
     <span class="dot">·</span><a href="https://github.com/AndroidHorizon/AndroidHorizonNX/blob/main/LICENSE">License</a>
   </div>
 </footer>
+
+<script>
+(function () {
+  var RAW_BASE = "https://raw.githubusercontent.com/AndroidHorizon/compat-reports/main/";
+  var loading = document.getElementById("community-reports-loading");
+  var empty = document.getElementById("community-reports-empty");
+  var tableWrap = document.getElementById("community-reports-table");
+  var tbody = document.getElementById("community-reports-tbody");
+
+  function pillClass(verdict) {
+    if (verdict === "ok") return "pill ok";
+    if (verdict === "fail" || verdict === "issues") return "pill no";
+    return "pill";
+  }
+
+  fetch(RAW_BASE + "data/games.json")
+    .then(function (r) { if (!r.ok) throw new Error("fetch failed"); return r.json(); })
+    .then(function (games) {
+      loading.style.display = "none";
+      if (!games || games.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+      games.forEach(function (g) {
+        var tr = document.createElement("tr");
+
+        var nameTd = document.createElement("td");
+        var iconHtml = g.icon
+          ? '<img src="' + RAW_BASE + g.icon + '" alt="" width="32" height="32" style="border-radius:8px;vertical-align:middle;margin-right:10px">'
+          : "";
+        nameTd.innerHTML = iconHtml + "<strong>" + g.game_name + "</strong><br><span style=\"color:var(--text-mute);font-size:0.85rem\">" + g.package_name + " · " + g.version_name + "</span>";
+
+        var statusTd = document.createElement("td");
+        statusTd.innerHTML = '<span class="' + pillClass(g.verdict) + '">' + g.verdict_label + "</span>";
+
+        var detailsTd = document.createElement("td");
+        var reportUrl = "https://github.com/AndroidHorizon/compat-reports/blob/main/" + g.report_path;
+        detailsTd.innerHTML = g.summary + ' — <a href="' + reportUrl + '">full report + logs</a>' +
+          ' <span style="color:var(--text-mute)">(submitted by @' + g.submitted_by + " from " + g.source_site + ")</span>";
+
+        tr.appendChild(nameTd);
+        tr.appendChild(statusTd);
+        tr.appendChild(detailsTd);
+        tbody.appendChild(tr);
+      });
+      tableWrap.style.display = "block";
+    })
+    .catch(function () {
+      loading.style.display = "none";
+      empty.style.display = "block";
+    });
+})();
+</script>
