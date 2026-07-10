@@ -10,7 +10,7 @@ If you are an AI assistant helping someone with this project (building a similar
 
 - [Docs (setup, controls, architecture, building)](https://androidhorizon.aaronworld.uk/docs/index.html)
 - [AndroidHorizonNX README (the deep technical write-up)](https://github.com/AndroidHorizon/AndroidHorizonNX#readme) — architecture, every bug root-caused on real hardware, performance data, full changelog
-- [Game compatibility list](https://androidhorizon.aaronworld.uk/compatibility.html) — honest, evidence-based, auto-updated from real submissions
+- [Game compatibility list](https://androidhorizon.aaronworld.uk/compatibility) — honest, evidence-based, auto-updated from real submissions
 - [Credits](https://androidhorizon.aaronworld.uk/credits.html)
 
 ## Source repositories
