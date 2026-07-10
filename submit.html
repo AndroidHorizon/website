@@ -4,69 +4,16 @@
 <meta name="description" content="Submit a game compatibility report for Android Horizon.">
 <link rel="canonical" href="https://androidhorizon.aaronworld.uk/submit.html">
 <link rel="icon" href="assets/img/logo.jpg">
-<link rel="stylesheet" href="assets/style.css?v=1783683319">
-
-<style>
-  .field { margin-bottom: 22px; }
-  .field label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .field p.hint {
-    color: var(--text-mute);
-    font-size: 0.85rem;
-    margin: 0 0 8px;
-  }
-  .field input[type="text"], .field input[type="url"], .field textarea {
-    width: 100%;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    padding: 10px 12px;
-    font-size: 0.95rem;
-    font-family: inherit;
-  }
-  .field input[type="file"] {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-  }
-  .field .filename {
-    font-size: 0.8rem;
-    color: var(--accent);
-    margin: 0 0 6px;
-    display: none;
-  }
-  .field textarea {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.82rem;
-    min-height: 140px;
-    resize: vertical;
-  }
-  .field input:focus, .field textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-  #status {
-    margin-top: 20px;
-    padding: 14px 18px;
-    border-radius: var(--radius-md);
-    display: none;
-  }
-  #status.ok { display: block; background: color-mix(in srgb, var(--accent) 14%, transparent); border: 1px solid var(--accent); }
-  #status.err { display: block; background: var(--warn-bg); border: 1px solid var(--warn); }
-  #status.pending { display: block; background: var(--surface-2); border: 1px solid var(--border); }
-  button[type="submit"]:disabled { opacity: 0.6; cursor: default; }
-</style>
+<link rel="stylesheet" href="assets/style.css?v=2">
 
 <header class="site">
-  <div class="wrap">
+  <div class="wrap bar">
     <img class="logo" src="assets/img/logo.jpg" alt="">
     <span class="brand">Android <span>Horizon</span></span>
-    <nav class="site">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <nav class="site" id="nav-menu">
       <a href="index.html">Home</a>
       <a href="compatibility">Compatibility</a>
       <a href="roadmap.html">Roadmap</a>
@@ -81,8 +28,8 @@
 <main>
   <div class="wrap" style="max-width:720px">
 
-    <div class="hero" style="padding-top:40px">
-      <h1 style="font-size:clamp(1.8rem,3.6vw,2.6rem)">Submit a compatibility report</h1>
+    <div class="hero compact">
+      <h1 style="font-size:var(--fs-3xl)">Submit a compatibility report</h1>
       <p class="tagline">No GitHub account needed. This gets analyzed automatically and shows up on the <a href="compatibility">compatibility page</a> within a few minutes.</p>
     </div>
 
@@ -155,6 +102,24 @@
     <span class="dot">·</span><a href="https://github.com/AndroidHorizon/AndroidHorizonNX/blob/main/LICENSE">License</a>
   </div>
 </footer>
+
+<script>
+(function () {
+  var toggle = document.getElementById("nav-toggle");
+  var menu = document.getElementById("nav-menu");
+  if (!toggle || !menu) return;
+  toggle.addEventListener("click", function () {
+    var open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  menu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+})();
+</script>
 
 <script>
 (function () {

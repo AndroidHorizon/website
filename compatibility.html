@@ -7,13 +7,16 @@
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://androidhorizon.aaronworld.uk/compatibility">
 <link rel="icon" href="assets/img/logo.jpg">
-<link rel="stylesheet" href="assets/style.css?v=1783683319">
+<link rel="stylesheet" href="assets/style.css?v=2">
 
 <header class="site">
-  <div class="wrap">
+  <div class="wrap bar">
     <img class="logo" src="assets/img/logo.jpg" alt="">
     <span class="brand">Android <span>Horizon</span></span>
-    <nav class="site">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <nav class="site" id="nav-menu">
       <a href="index.html">Home</a>
       <a href="compatibility" class="active">Compatibility</a>
       <a href="roadmap.html">Roadmap</a>
@@ -28,8 +31,8 @@
 <main>
   <div class="wrap">
 
-    <div class="hero" style="padding-top:40px">
-      <h1 style="font-size:clamp(1.8rem,3.6vw,2.6rem)">Game Compatibility</h1>
+    <div class="hero compact">
+      <h1 style="font-size:var(--fs-3xl)">Game Compatibility</h1>
       <p class="tagline">Every row below came from someone actually running the game on hardware — nothing here is guessed.</p>
       <div class="btn-row">
         <a class="btn primary" href="submit.html">Submit a compatibility report</a>
@@ -103,6 +106,24 @@
     <span class="dot">·</span><a href="https://github.com/AndroidHorizon/AndroidHorizonNX/blob/main/LICENSE">License</a>
   </div>
 </footer>
+
+<script>
+(function () {
+  var toggle = document.getElementById("nav-toggle");
+  var menu = document.getElementById("nav-menu");
+  if (!toggle || !menu) return;
+  toggle.addEventListener("click", function () {
+    var open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  menu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+})();
+</script>
 
 <script>
 (function () {

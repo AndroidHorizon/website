@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://androidhorizon.aaronworld.uk/">
 <link rel="icon" href="assets/img/logo.jpg">
-<link rel="stylesheet" href="assets/style.css?v=1783683319">
+<link rel="stylesheet" href="assets/style.css?v=2">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,10 +26,13 @@
 </script>
 
 <header class="site">
-  <div class="wrap">
+  <div class="wrap bar">
     <img class="logo" src="assets/img/logo.jpg" alt="">
     <span class="brand">Android <span>Horizon</span></span>
-    <nav class="site">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <nav class="site" id="nav-menu">
       <a href="index.html" class="active">Home</a>
       <a href="compatibility">Compatibility</a>
       <a href="roadmap.html">Roadmap</a>
@@ -112,7 +115,7 @@
           <p>The actual engine — ELF loading, JIT, the Bionic/JNI compat layer, audio, sensors. Everything above is really describing what this repo does.</p>
         </div>
       </div>
-      <p style="margin-top:18px">The full write-up — build steps, the changelog, every bug that got root-caused along the way — is in <a href="docs/index.html">the docs</a>.</p>
+      <p style="margin-top:var(--sp-5)">The full write-up — build steps, the changelog, every bug that got root-caused along the way — is in <a href="docs/index.html">the docs</a>.</p>
     </section>
 
   </div>
@@ -129,8 +132,24 @@
 
 <script>
 (function () {
-  // Only worth showing once there's actually a crowd — a "2 online" badge
-  // reads as more embarrassing than inviting for a project this size.
+  var toggle = document.getElementById("nav-toggle");
+  var menu = document.getElementById("nav-menu");
+  if (!toggle || !menu) return;
+  toggle.addEventListener("click", function () {
+    var open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  menu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
   var ONLINE_THRESHOLD = 25;
   fetch("https://discord.com/api/guilds/1523655566851969034/widget.json")
     .then(function (r) { return r.ok ? r.json() : null; })
