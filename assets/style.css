@@ -117,10 +117,15 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Keep iOS Safari from inflating body text in landscape, and never let a long
+   unbroken token (a package id, a URL) push the layout wider than the screen. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
 body {
   font-family: var(--font-sans);
   line-height: 1.6;
   font-size: var(--fs-base);
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   background-image:
     radial-gradient(620px circle at 10% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 60%),
@@ -517,7 +522,7 @@ footer.site .dot { color: var(--border); margin: 0 4px; }
   .hero { padding: var(--sp-10) 0 var(--sp-2); }
   section { margin: var(--sp-10) 0; }
   .compat-controls { flex-direction: column; align-items: stretch; }
-  .tabs { align-self: flex-start; }
+  .tabs, .compat-showfail { align-self: flex-start; }
   .docs-layout { grid-template-columns: 1fr; }
   .docs-sidebar { position: static; flex-direction: row; flex-wrap: wrap; max-height: none; margin-bottom: var(--sp-6); border-bottom: 1px solid var(--border); padding-bottom: var(--sp-4); }
   .docs-sidebar a { border-left: none; border-bottom: 2px solid transparent; }
@@ -528,11 +533,15 @@ footer.site .dot { color: var(--border); margin: 0 4px; }
   .wrap { padding: 0 var(--sp-4); }
   header.site .brand { font-size: var(--fs-base); }
   .hero { padding: var(--sp-8) 0 var(--sp-2); }
+  .hero img.logo-lg { width: 92px; height: 92px; margin-bottom: var(--sp-4); }
   .hero p.tagline { font-size: var(--fs-md); }
+  .btn-row { gap: var(--sp-2); }
   .btn { padding: 12px 20px; font-size: var(--fs-sm); }
   .card { padding: var(--sp-4) var(--sp-5); }
   section { margin: var(--sp-8) 0; }
   th, td { padding: var(--sp-3); }
+  /* Give the compat table a little more room before it needs to scroll. */
+  table { min-width: 520px; }
 }
 
 /* ═══════════════════════════ Credits reel ═══════════════════════════ */
