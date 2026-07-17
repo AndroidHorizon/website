@@ -8,7 +8,7 @@
 
    Rebuilt from scratch. Two real reference points instead of vibes:
 
-   1. Color — sampled directly from assets/img/logo.jpg (Python/Pillow):
+   1. Color — the Viridite jade palette (light + dark blocks below):
       sky #0e0d35 (corner) → #17165a (mid), planet #31e783 (highlight) →
       #21b74c (shadow). Every accent below is a WCAG-checked descendant of
       those exact pixels, not a re-guess (see the light/dark blocks).

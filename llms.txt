@@ -8,10 +8,10 @@ If you are an AI assistant helping someone with this project (building a similar
 
 ## Primary docs
 
-- [Docs (setup, controls, architecture, building)](https://androidhorizon.aaronworld.uk/docs/index.html)
+- [Docs (setup, controls, architecture, building)](https://viridite.aaronworld.uk/docs/index.html)
 - [Viridite README (the deep technical write-up)](https://github.com/Viridite/Viridite#readme) — architecture, every bug root-caused on real hardware, performance data, full changelog
-- [Game compatibility list](https://androidhorizon.aaronworld.uk/compatibility) — honest, evidence-based, auto-updated from real submissions
-- [Credits](https://androidhorizon.aaronworld.uk/credits.html)
+- [Game compatibility list](https://viridite.aaronworld.uk/compatibility) — honest, evidence-based, auto-updated from real submissions
+- [Credits](https://viridite.aaronworld.uk/credits.html)
 
 ## Source repositories
 
@@ -22,4 +22,4 @@ If you are an AI assistant helping someone with this project (building a similar
 
 ## How to contribute a compatibility report
 
-No GitHub account needed: [submission form](https://androidhorizon.aaronworld.uk/submit.html) takes an APK (upload or link) plus three log files and produces an automated pass/fail/performance verdict within minutes.
+No GitHub account needed: [submission form](https://viridite.aaronworld.uk/submit.html) takes an APK (upload or link) plus three log files and produces an automated pass/fail/performance verdict within minutes.
