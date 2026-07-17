@@ -34,8 +34,8 @@
   --text-dim:    #536471;
   --text-mute:   #8b98a5;
   --border:      #e6ebe8;
-  --accent:      #0c9463;
-  --accent-hover:#0a7d54;
+  --accent:      #00a34d;
+  --accent-hover:#008a41;
   --accent-ink:  #ffffff;
   --warn:        #a15c00;
   --warn-bg:     #fff3e0;
@@ -85,9 +85,9 @@
     --text-dim:  #9db8ab;
     --text-mute: #6d8a7c;
     --border:    #245043;
-    --accent:    #35e0a2;
-    --accent-hover:#5fecba;
-    --accent-ink:#03130d;
+    --accent:    #00e676;
+    --accent-hover:#5cf29e;
+    --accent-ink:#04140c;
     --warn:      #f0b94d;
     --warn-bg:   rgba(240, 185, 77, 0.14);
     --danger:    #ff6b7f;
@@ -185,7 +185,9 @@ header.site .bar {
   min-width: 0;
 }
 
-header.site img.logo { width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; }
+/* The gem logo is designed to sit on white — give it a white tile so it reads
+   correctly on any header background (incl. dark mode). */
+header.site img.logo { width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; background: #fff; padding: 3px; }
 
 header.site .brand {
   font-weight: 800;
@@ -285,9 +287,11 @@ main { padding: var(--sp-2) 0 var(--sp-20); }
 .hero.compact::before { display: none; }
 
 .hero img.logo-lg {
-  width: 96px; height: 96px;
+  width: 104px; height: 104px;
   border-radius: var(--radius-lg);
   margin-bottom: var(--sp-5);
+  background: #fff;            /* gem logo sits on white by design */
+  padding: 12px;
   box-shadow: var(--shadow-lg), 0 0 48px color-mix(in srgb, var(--accent) 42%, transparent);
 }
 
@@ -295,7 +299,7 @@ main { padding: var(--sp-2) 0 var(--sp-20); }
 /* Jade gradient wordmark for the accented phrase. */
 .hero h1 span {
   color: var(--accent);
-  background: linear-gradient(135deg, #6cf0bf, var(--accent) 55%, #0f8a54);
+  background: linear-gradient(135deg, #69F0AE, #00E676 55%, #00A854);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -537,3 +541,43 @@ footer.site .dot { color: var(--border); margin: 0 4px; }
   section { margin: var(--sp-8) 0; }
   th, td { padding: var(--sp-3); }
 }
+
+/* ═══════════════════════════ Credits reel ═══════════════════════════ */
+/* The reel is a fixed-height scroll container the JS nudges by 1px like
+   rolling end credits; without a bounded height + overflow it just dumped
+   everything unstyled. */
+#reel-wrap { position: relative; max-width: 760px; margin: 0 auto; }
+#reel {
+  height: min(62vh, 560px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: var(--sp-10) 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+}
+#reel::-webkit-scrollbar { display: none; }
+
+.credit-category { text-align: center; margin-bottom: var(--sp-12); }
+.credit-category h3 {
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: var(--sp-5);
+}
+.credit-people { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
+.credit-person {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+  width: 100px; padding: var(--sp-3);
+  color: var(--text); font-weight: 600; font-size: var(--fs-sm);
+  border-radius: var(--radius-md);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.credit-person:hover { background: var(--surface-2); transform: translateY(-2px); text-decoration: none; }
+.credit-person img {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 2px solid var(--border); background: var(--surface-2);
+}
+.credit-person span { word-break: break-word; text-align: center; line-height: 1.3; }
+.credit-hint { text-align: center; color: var(--text-mute); font-size: var(--fs-sm); margin-top: var(--sp-4); }
