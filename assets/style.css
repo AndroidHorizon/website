@@ -400,6 +400,12 @@ th { color: var(--text-mute); font-size: var(--fs-xs); text-transform: uppercase
 }
 .pill.ok { color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .pill.no { color: var(--danger); background: color-mix(in srgb, var(--danger) 14%, transparent); }
+/* Flawless — the top tier: a filled accent chip so it reads as best-in-class. */
+.pill.flawless {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #0a7d43));
+  box-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 45%, transparent);
+}
 
 /* ═══════════════════════════ Compat list controls ═══════════════════════════ */
 

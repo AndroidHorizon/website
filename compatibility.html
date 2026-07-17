@@ -162,6 +162,7 @@
   };
 
   function pillClass(verdict) {
+    if (verdict === "flawless") return "pill flawless";
     if (verdict === "ok") return "pill ok";
     if (verdict === "fail" || verdict === "issues") return "pill no";
     return "pill";
@@ -198,9 +199,10 @@
   }
 
   function verdictRank(v) {
-    if (v === "ok") return 0;
-    if (v === "issues") return 1;
-    return 2; // fail / unknown
+    if (v === "flawless") return 0;
+    if (v === "ok") return 1;
+    if (v === "issues") return 2;
+    return 3; // fail / unknown
   }
 
   function buildRow(entry, isSecondary) {
