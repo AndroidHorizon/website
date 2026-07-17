@@ -208,7 +208,9 @@
     if (isSecondary) tr.className = "version-row";
 
     var nameTd = document.createElement("td");
-    var mature = MATURE_PACKAGES.hasOwnProperty(entry.package_name);
+    // Mature = the pipeline flagged it from the Play Store content rating
+    // (entry.mature), or it's in the manual override seed below.
+    var mature = entry.mature === true || MATURE_PACKAGES.hasOwnProperty(entry.package_name);
     var iconSrc = entry.icon ? RAW_BASE + entry.icon : "";
     var iconHtml = iconSrc
       ? '<span class="icon-wrap' + (mature ? " blurred" : "") + '"><img src="' + iconSrc + '" alt="" width="32" height="32" loading="lazy">' +
